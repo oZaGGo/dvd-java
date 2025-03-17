@@ -1,9 +1,7 @@
 # dvd-java
 The classical standby DVD animation on the terminal made with Java using ArrayList. (Degree project)
 
-![imagen](https://github.com/user-attachments/assets/dc73c859-dc89-4c9b-800f-a7a4b1bb0ce3)
-
-![Captura desde 2025-03-17 08-45-39](https://github.com/user-attachments/assets/4d02613e-e38f-4de9-a405-c29b19639910)
+![Grabación de pantalla desde 2025-03-17 12-30-18](https://github.com/user-attachments/assets/c749baef-7443-4b6e-8a75-06c175867caf)
 
 Java tips:
 
