@@ -97,7 +97,7 @@ public class dvdJava {
                     output += "l";
                 }
             } else { // right
-                if ((posX + velocity) >= sizeX - velocity) { // Check collision
+                if ((posX + velocity) >= sizeX ) { // Check collision
                     output += "l";
                 } else {
                     output += "r";
@@ -131,7 +131,7 @@ public class dvdJava {
             }
 
             if (beforeDirection.charAt(0) == 'r') { // try to go right
-                if ((posX + velocity) >= sizeX - velocity) { // Check collision
+                if ((posX + velocity) >= sizeX ) { // Check collision
                     output += "l";
                 } else {
                     output += "r";
@@ -139,7 +139,7 @@ public class dvdJava {
             }
 
             if (beforeDirection.charAt(1) == 'd') {
-                if (((posX + velocity) >= sizeX - velocity) || ((posX - velocity) <= velocity)) { // It will touch the
+                if (((posX + velocity) >= sizeX ) || ((posX - velocity) <= velocity)) { // It will touch the
                                                                                                   // right and left
                     // borders?
                     if ((posY - velocity) <= 0) { // Check collision and follow the movement
@@ -157,7 +157,7 @@ public class dvdJava {
             }
 
             if (beforeDirection.charAt(1) == 'u') { // try to go down
-                if (((posX + velocity) >= sizeX - velocity) || ((posX - velocity) <= velocity)) { // It will touch the
+                if (((posX + velocity) >= sizeX ) || ((posX - velocity) <= velocity)) { // It will touch the
                                                                                                   // right and left
                     // borders
                     if ((posY + velocity) >= sizeY) { // Check collision and follow the movement
@@ -246,14 +246,14 @@ public class dvdJava {
     public static boolean collision(String direction) {
         switch (direction) {
             case "ru":
-                if ((posX + velocity) >= sizeX - velocity || (posY + velocity) >= sizeY) {
+                if ((posX + velocity) >= sizeX  || (posY + velocity) >= sizeY) {
                     return true;
                 } else {
                     return false;
                 }
 
             case "rd":
-                if ((posX + velocity) >= sizeX - velocity || (posY - velocity) <= 0) {
+                if ((posX + velocity) >= sizeX  || (posY - velocity) <= 0) {
                     return true;
                 } else {
                     return false;
