@@ -5,7 +5,9 @@
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.awt.Toolkit;
+import java.applet.Applet;
+import java.applet.AudioClip;
+import java.net.URL;
 
 public class dvdJava {
 
@@ -20,7 +22,7 @@ public class dvdJava {
 
     public static int newPosX, newPosY;
 
-    public static int velocity = 1;
+    public static int velocity = 2;
 
     // Colors
 
@@ -95,7 +97,7 @@ public class dvdJava {
                     output += "l";
                 }
             } else { // right
-                if ((posX + velocity) >= sizeX-velocity) { // Check collision
+                if ((posX + velocity) >= sizeX - velocity) { // Check collision
                     output += "l";
                 } else {
                     output += "r";
@@ -129,7 +131,7 @@ public class dvdJava {
             }
 
             if (beforeDirection.charAt(0) == 'r') { // try to go right
-                if ((posX + velocity) >= sizeX-velocity) { // Check collision
+                if ((posX + velocity) >= sizeX - velocity) { // Check collision
                     output += "l";
                 } else {
                     output += "r";
@@ -137,8 +139,9 @@ public class dvdJava {
             }
 
             if (beforeDirection.charAt(1) == 'd') {
-                if (((posX + velocity) >= sizeX-velocity) || ((posX - velocity) <= velocity)) { // It will touch the right and left
-                                                                                // borders?
+                if (((posX + velocity) >= sizeX - velocity) || ((posX - velocity) <= velocity)) { // It will touch the
+                                                                                                  // right and left
+                    // borders?
                     if ((posY - velocity) <= 0) { // Check collision and follow the movement
                         output += "u";
                     } else {
@@ -154,8 +157,9 @@ public class dvdJava {
             }
 
             if (beforeDirection.charAt(1) == 'u') { // try to go down
-                if (((posX + velocity) >= sizeX-velocity) || ((posX - velocity) <= velocity)) { // It will touch the right and left
-                                                                                // borders
+                if (((posX + velocity) >= sizeX - velocity) || ((posX - velocity) <= velocity)) { // It will touch the
+                                                                                                  // right and left
+                    // borders
                     if ((posY + velocity) >= sizeY) { // Check collision and follow the movement
                         output += "d";
                     } else {
@@ -176,9 +180,9 @@ public class dvdJava {
 
     public static void force(String direction) {
         // Empty the current pos
-        surface.get(posY).set(posX-1, " ");
+        surface.get(posY).set(posX - 1, " ");
         surface.get(posY).set(posX, " ");
-        surface.get(posY).set(posX+1, " ");
+        surface.get(posY).set(posX + 1, " ");
 
         switch (direction) {
             case "lu":
@@ -186,9 +190,9 @@ public class dvdJava {
                 newPosX = posX - velocity;
                 newPosY = posY + velocity;
 
-                surface.get(newPosY).set(newPosX-1, colors[currentColor] + "D" + RESET); 
+                surface.get(newPosY).set(newPosX - 1, colors[currentColor] + "D" + RESET);
                 surface.get(newPosY).set(newPosX, colors[currentColor] + "v" + RESET);
-                surface.get(newPosY).set(newPosX+1, colors[currentColor] + "D" + RESET); 
+                surface.get(newPosY).set(newPosX + 1, colors[currentColor] + "D" + RESET);
 
                 posX = newPosX;
 
@@ -200,9 +204,9 @@ public class dvdJava {
                 newPosX = posX - velocity;
                 newPosY = posY - velocity;
 
-                surface.get(newPosY).set(newPosX-1, colors[currentColor] + "D" + RESET); 
+                surface.get(newPosY).set(newPosX - 1, colors[currentColor] + "D" + RESET);
                 surface.get(newPosY).set(newPosX, colors[currentColor] + "v" + RESET);
-                surface.get(newPosY).set(newPosX+1, colors[currentColor] + "D" + RESET); 
+                surface.get(newPosY).set(newPosX + 1, colors[currentColor] + "D" + RESET);
 
                 posX = newPosX;
 
@@ -213,9 +217,9 @@ public class dvdJava {
                 newPosX = posX + velocity;
                 newPosY = posY + velocity;
 
-                surface.get(newPosY).set(newPosX-1, colors[currentColor] + "D" + RESET); 
+                surface.get(newPosY).set(newPosX - 1, colors[currentColor] + "D" + RESET);
                 surface.get(newPosY).set(newPosX, colors[currentColor] + "v" + RESET);
-                surface.get(newPosY).set(newPosX+1, colors[currentColor] + "D" + RESET);  
+                surface.get(newPosY).set(newPosX + 1, colors[currentColor] + "D" + RESET);
                 posX = newPosX;
 
                 posY = newPosY;
@@ -225,9 +229,9 @@ public class dvdJava {
                 newPosX = posX + velocity;
                 newPosY = posY - velocity;
 
-                surface.get(newPosY).set(newPosX-1, colors[currentColor] + "D" + RESET); 
+                surface.get(newPosY).set(newPosX - 1, colors[currentColor] + "D" + RESET);
                 surface.get(newPosY).set(newPosX, colors[currentColor] + "v" + RESET);
-                surface.get(newPosY).set(newPosX+1, colors[currentColor] + "D" + RESET); 
+                surface.get(newPosY).set(newPosX + 1, colors[currentColor] + "D" + RESET);
 
                 posX = newPosX;
 
@@ -242,14 +246,14 @@ public class dvdJava {
     public static boolean collision(String direction) {
         switch (direction) {
             case "ru":
-                if ((posX + velocity) >= sizeX-velocity || (posY + velocity) >= sizeY) {
+                if ((posX + velocity) >= sizeX - velocity || (posY + velocity) >= sizeY) {
                     return true;
                 } else {
                     return false;
                 }
 
             case "rd":
-                if ((posX + velocity) >= sizeX-velocity || (posY - velocity) <= 0) {
+                if ((posX + velocity) >= sizeX - velocity || (posY - velocity) <= 0) {
                     return true;
                 } else {
                     return false;
@@ -282,11 +286,9 @@ public class dvdJava {
         // Initial direction
         String direction = randomDirection("");
 
-        Random r = new Random();
-
         while (true) { // Print loop
             try {
-                // Move the ball
+                // Move
                 if (collision(direction)) {
                     if (currentColor < 5) {
                         currentColor++;
@@ -295,7 +297,12 @@ public class dvdJava {
                     }
                     direction = randomDirection(direction);
                     force(direction);
-                    Toolkit.getDefaultToolkit().beep();
+
+                    // Sound
+                    URL soundURL = new URL("file:beep.wav"); // Reemplazar con la ruta del archivo
+                    AudioClip clip = Applet.newAudioClip(soundURL);
+                    clip.play();
+                    
                 } else {
                     force(direction);
                 }
