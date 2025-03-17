@@ -42,7 +42,7 @@ public class dvdJava {
             }
             System.out.println(); // Skip lines
         }
-        Thread.sleep(120); // Waits 600ms
+        Thread.sleep(120); // Waits 120ms
     }
 
     public static void root() {
@@ -60,7 +60,7 @@ public class dvdJava {
                 } else if (i == sizeY) {
                     surface.get(i).add("="); // Bottom border
                 } else { // horizontal broders
-                    if (j >= velocity && j < sizeX) {
+                    if (j >= 1 && j < sizeX) {
                         surface.get(i).add(" ");
                     } else {
                         surface.get(i).add("|");
