@@ -1,6 +1,6 @@
 /*
  * Author: zagg294
- * Topic: ArrayList exercise
+ * Topic: An stupid therminal animation of a DVD logo bouncing around the screen
 */
 
 import java.util.ArrayList;
