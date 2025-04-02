@@ -39,3 +39,5 @@ Then run the script:
 
 Thats all!
 
+Usage: `dvd [--help] [--version]`
+
