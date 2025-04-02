@@ -5,9 +5,6 @@
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.applet.Applet;
-import java.applet.AudioClip;
-import java.net.URL;
 
 public class dvdJava {
 
@@ -19,6 +16,7 @@ public class dvdJava {
     public static int sizeY = 12;
 
     public static int posX, posY;
+    public static int iposX, iposY;
 
     public static int newPosX, newPosY;
 
@@ -44,7 +42,9 @@ public class dvdJava {
             }
             System.out.println(); // Skip lines
         }
-        Thread.sleep(120); // Waits 120ms
+        // System.out.println(iposX + " " + iposY);
+        // System.out.println(posX + " " + posY);
+        Thread.sleep(150); // Waits 120ms
     }
 
     public static void root() {
@@ -75,8 +75,15 @@ public class dvdJava {
     public static void randomizePosition() {
         Random r = new Random();
 
-        posX = r.nextInt(velocity, sizeX - velocity);
-        posY = r.nextInt(velocity, sizeY - velocity);
+        posX = r.nextInt(velocity * 2, sizeX - (velocity * 2));
+        posY = r.nextInt(velocity * 2, sizeY - (velocity * 2));
+
+        // Just for better animation, it can spawn anywhere
+        posX = 20;
+        posY = 7;
+
+        iposX = posX;
+        iposY = posY;
     }
 
     public static String randomDirection(String beforeDirection) {
@@ -91,13 +98,13 @@ public class dvdJava {
 
             // x axis
             if (xDir) { // left
-                if ((posX - velocity) <= velocity) { // Check collision
+                if ((posX - velocity) <= 1) { // Check collision
                     output += "r";
                 } else {
                     output += "l";
                 }
             } else { // right
-                if ((posX + velocity) >= sizeX ) { // Check collision
+                if ((posX + velocity) >= (sizeX - 1)) { // Check collision
                     output += "l";
                 } else {
                     output += "r";
@@ -122,7 +129,7 @@ public class dvdJava {
             return output;
         } else {
             if (beforeDirection.charAt(0) == 'l') { // try to go left
-                if ((posX - velocity) <= velocity) { // Check collision
+                if ((posX - velocity) <= 1) { // Check collision
                     output += "r";
                 } else {
                     output += "l";
@@ -131,7 +138,7 @@ public class dvdJava {
             }
 
             if (beforeDirection.charAt(0) == 'r') { // try to go right
-                if ((posX + velocity) >= sizeX ) { // Check collision
+                if ((posX + velocity) >= (sizeX - 1)) { // Check collision
                     output += "l";
                 } else {
                     output += "r";
@@ -139,8 +146,8 @@ public class dvdJava {
             }
 
             if (beforeDirection.charAt(1) == 'd') {
-                if (((posX + velocity) >= sizeX ) || ((posX - velocity) <= velocity)) { // It will touch the
-                                                                                                  // right and left
+                if (((posX + velocity) >= (sizeX - 1)) || ((posX - velocity) <= 1)) { // It will touch the
+                                                                                      // right and left
                     // borders?
                     if ((posY - velocity) <= 0) { // Check collision and follow the movement
                         output += "u";
@@ -157,8 +164,8 @@ public class dvdJava {
             }
 
             if (beforeDirection.charAt(1) == 'u') { // try to go down
-                if (((posX + velocity) >= sizeX ) || ((posX - velocity) <= velocity)) { // It will touch the
-                                                                                                  // right and left
+                if (((posX + velocity) >= sizeX) || ((posX - velocity) <= velocity)) { // It will touch the
+                                                                                       // right and left
                     // borders
                     if ((posY + velocity) >= sizeY) { // Check collision and follow the movement
                         output += "d";
@@ -246,14 +253,14 @@ public class dvdJava {
     public static boolean collision(String direction) {
         switch (direction) {
             case "ru":
-                if ((posX + velocity) >= sizeX  || (posY + velocity) >= sizeY) {
+                if ((posX + velocity) >= (sizeX - 1) || (posY + velocity) >= sizeY) {
                     return true;
                 } else {
                     return false;
                 }
 
             case "rd":
-                if ((posX + velocity) >= sizeX  || (posY - velocity) <= 0) {
+                if ((posX + velocity) >= (sizeX - 1) || (posY - velocity) <= 0) {
                     return true;
                 } else {
                     return false;
@@ -277,38 +284,57 @@ public class dvdJava {
 
     public static void main(String[] args) {
 
-        // Screen initialization
-        root();
+        if (args.length > 0) {
+            switch (args[0]) {
+                case "--help":
+                    System.out.println("This little program was made by me (zagg294) as a joke, cause i was watching dvd videos at 4:00AM.");
+                    System.out.println("Github: https://github.com/oZaGGo/dvd-java");
+                    break;
+                case "--version":
+                    System.out.println("Version 1.0");
+                    System.out.println("Github: https://github.com/oZaGGo/dvd-java");
+                    break;
+                case "-h":
+                    System.out.println("This little program was made by me (zagg294) as a joke, cause i was watching dvd videos at 4:00AM.");
+                    System.out.println("Github: https://github.com/oZaGGo/dvd-java");
+                    break;
+                case "-v":
+                    System.out.println("Version 1.0");
+                    System.out.println("Github: https://github.com/oZaGGo/dvd-java");
+                    break;
+                default:
+                    break;
+            }
 
-        // Position initialization
-        randomizePosition();
+        } else {
 
-        // Initial direction
-        String direction = randomDirection("");
+            // Screen initialization
+            root();
 
-        while (true) { // Print loop
-            try {
-                // Move
-                if (collision(direction)) {
-                    if (currentColor < 5) {
-                        currentColor++;
+            // Position initialization
+            randomizePosition();
+
+            // Initial direction
+            String direction = randomDirection("");
+
+            while (true) { // Print loop
+                try {
+                    // Move
+                    if (collision(direction)) {
+                        if (currentColor < 5) {
+                            currentColor++;
+                        } else {
+                            currentColor = 0;
+                        }
+                        direction = randomDirection(direction);
+                        force(direction);
                     } else {
-                        currentColor = 0;
+                        force(direction);
                     }
-                    direction = randomDirection(direction);
-                    force(direction);
-
-                    // Sound
-                    URL soundURL = new URL("file:beep.wav"); // Reemplazar con la ruta del archivo
-                    AudioClip clip = Applet.newAudioClip(soundURL);
-                    clip.play();
-                    
-                } else {
-                    force(direction);
+                    framePrint();// Print frame
+                } catch (Exception e) {
+                    e.getMessage();
                 }
-                framePrint();// Print frame
-            } catch (Exception e) {
-                e.getMessage();
             }
         }
 
