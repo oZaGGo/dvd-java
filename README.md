@@ -9,7 +9,7 @@ First clone the repository:
 
 ```shell
 
-git clone https://github.com/oZaGGo/dvd-java | cd dvd-java
+git clone https://github.com/oZaGGo/dvd-java
 
 ```
 
