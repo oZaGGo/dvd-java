@@ -5,11 +5,15 @@ The classical standby DVD animation.. on the terminal! Made with Java.
 
 # How to install?
 
+First clone the repository:
+
 ```shell
 
 git clone https://github.com/oZaGGo/dvd-java | cd dvd-java
 
 ```
+
+Then grant execute permission to the script install:
 
 ```shell
 
@@ -17,9 +21,13 @@ chmod +x install.sh
 
 ```
 
+Then run the script:
+
 ```shell
 
 ./install.sh
 
 ```
+
+Thats all!
 
