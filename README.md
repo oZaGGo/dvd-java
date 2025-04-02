@@ -13,6 +13,14 @@ git clone https://github.com/oZaGGo/dvd-java | cd dvd-java
 
 ```
 
+Go to the folder:
+
+```shell
+
+cd dvd-java
+
+```
+
 Then grant execute permission to the script install:
 
 ```shell
